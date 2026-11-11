@@ -1,0 +1,83 @@
+def grid_getchar_index(grid,index):
+    if index<0 or index>=len(grid):
+        return "error"
+    lgrid = list(grid)
+    foundchar = lgrid[index]
+    return foundchar
+
+def grid_getchar(grid,x,y,gx=55,gy=20):
+    if x<0 or y<0 or x>=gx or y>=gy:
+        return "error"
+    index = (((gy-1)-y)*gx)+x
+    lgrid = list(grid)
+    foundchar = lgrid[index]
+    return foundchar
+    
+def grid_set(grid,char,x,y,gx=55,gy=20):
+    if x<0 or y<0 or x>=gx or y>=gy:
+        return "error"
+    index = (((gy-1)-y)*gx)+x
+    ls = list(grid)
+    ls[index] = char
+    return ls
+
+def grid_set_str(grid,char,x,y,gx=55,gy=20):
+    if x<0 or y<0 or x>=gx or y>=gy:
+        return "error"
+    index = (((gy-1)-y)*gx)+x
+    ls = list(grid)
+    ls[index] = char
+    grid = "".join(ls)
+    return grid
+
+def grid_set_index(grid,char,index):
+    if index<0 or index>=len(grid):
+        return "error"
+    ls = list(grid)
+    ls[index] = char
+    return ls
+    
+def grid_set_index_str(grid,char,index):
+    if index<0 or index>=len(grid):
+        return "error"
+    ls = list(grid)
+    ls[index] = char
+    s = "".join(ls)
+    return s
+
+def grid_print(grid,gx=55,gy=20,sep=None):
+    for i in range(gy):
+        start = i*gx
+        end = start + gx
+        row = grid[start:end]
+        if sep is None:
+            print(row)
+        else:
+            print(sep.join(row))
+
+def grid_create(gx=55,gy=20,gchar="."):
+    return gchar*gx*gy
+
+def grid_as_str(grid):
+    string = "".join(grid)
+    return string
+
+def grid_as_list(grid):
+    return list(grid)
+
+def grid_setgrid(base_grid,add_grid,x,y,bx=55,by=20,ax=5,ay=5,ignore=None):
+    baseL = list(base_grid)
+    for sy in range(ay):
+        for sx in range(ax):
+            char = grid_getchar(add_grid,sx,sy,ax,ay)
+            if char == "error" or char == ignore:
+                continue
+            place_x = x+sx
+            place_y = y+sy
+            baseL = grid_set(baseL,char,place_x,place_y,bx,by)
+    return baseL
+
+def grid_setgrid_center(base_grid,add_grid,x,y,bx=55,by=20,ax=5,ay=5,ignore=None):
+    offsetX = x-(ax//2)
+    offsetY = y-(ay//2)
+    return grid_setgrid(base_grid,add_grid,offsetX,offsetY,bx,by,ax,ay,ignore)
