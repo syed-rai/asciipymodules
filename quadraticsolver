@@ -1,0 +1,91 @@
+from cmath import sqrt
+
+def solve_abcstandard(a,b,c,o):
+    # Try to use the quadratic formula, with o deciding if the sqrt is plus or minus for the plusminus
+    try:
+        return (-1*b + sqrt((b**2)-4*a*c))/(2*a) if o == 1 else (-1*b - sqrt((b**2)-4*a*c))/(2*a)
+    except ValueError:
+        return("None (Imaginary)")
+
+def standardform(a,b,c):
+    
+    # Ask for standard form values
+    equationabc = f"{a}x^2 + {b}x + {c} = 0"
+
+    # Find answers and return
+    answer1 = solve_abcstandard(a,b,c,1)
+    answer2 = solve_abcstandard(a,b,c,-1)
+    return answer1, answer2
+
+def standardform_moreoutputs(a,b,c):
+    
+    # Ask for standard form values
+    equationabc = f"{a}x^2 + {b}x + {c} = 0"
+    vertexX = (-b)/(2*a)
+    vertexY = (a*(vertexX**2))+(b*vertexX)+c
+
+    # Find answers and return
+    answer1 = solve_abcstandard(a,b,c,1)
+    answer2 = solve_abcstandard(a,b,c,-1)
+    return answer1, answer2, equationabc, vertexX, vertexY
+
+def vertexform(a,h,k):
+    # Find b and c for standard form (a stays the same)
+    b = -2*a*h
+    c = (a*(h**2))+k
+    equationabc = f"{a}x^2 + {b}x + {c} = 0"
+    equationvertex = f"{a}(x - {h})^2 + {k}"
+    
+    # Find answers and return
+    answer1 = solve_abcstandard(a,b,c,1)
+    answer2 = solve_abcstandard(a,b,c,-1)
+    return answer1, answer2
+
+def vertexform_moreoutputs(a,h,k):
+    # Find b and c for standard form (a stays the same)
+    b = -2*a*h
+    c = (a*(h**2))+k
+    equationabc = f"{a}x^2 + {b}x + {c} = 0"
+    equationvertex = f"{a}(x - {h})^2 + {k}"
+    
+    # Find answers and return
+    answer1 = solve_abcstandard(a,b,c,1)
+    answer2 = solve_abcstandard(a,b,c,-1)
+    return answer1, answer2, equationabc, equationvertex, a, b, c
+
+def factoredformSC(a,p,q):
+
+    # Find b and c for standard form (a stays the same)
+    b = -a*(p+q)
+    c = a*p*q
+    equationabc = f"{a}x^2 + {b}x + {c} = 0"
+    equationfactor =f"{a}(x - {p})(x - {q}) = 0"
+
+    # Find answers and return
+    answer1 = solve_abcstandard(a,b,c,1)
+    answer2 = solve_abcstandard(a,b,c,-1)
+    return answer1,answer2
+
+def factoredform_moreoutputs(a,p,q):
+
+    # Find b and c for standard form (a stays the same)
+    b = -a*(p+q)
+    c = a*p*q
+    equationabc = f"{a}x^2 + {b}x + {c} = 0"
+    equationfactor =f"{a}(x - {p})(x - {q}) = 0"
+    vertexX = (p+q)/2
+    vertexY = a*(vertexX-p)*(vertexX-q)
+
+    # Find answers and return
+    answer1 = solve_abcstandard(a,b,c,1)
+    answer2 = solve_abcstandard(a,b,c,-1)
+    return answer1,answer2, equationabc, equationfactor, a, b, c, vertexX, vertexY
+
+def factoredform(a,p,q):
+    yint = f"Y intercept: {a*p*q}"
+    equation = f"{a}(x - {p})(x - {q}) = 0"
+
+    # Find answers and return (p and q are the answers as they exclude the minus, so in calculation the turn out to be the roots)
+    answer1 = p
+    answer2 = q
+    return answer1,answer2
